@@ -19,7 +19,7 @@
                 <div class="row">
 
                     <div class="col-md-6">
-                        <form action="{{ route('categories.store') }}" method="post">
+                        <form action="{{ route('categories.update', ['id' => $category->id]) }}" method="post">
                          @csrf
                         <div class="form-group">
                             <label>Tên danh mục</label>

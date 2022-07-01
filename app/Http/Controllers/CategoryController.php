@@ -46,8 +46,17 @@ class CategoryController extends Controller
      
         return view('admin.manage.categories.edit', compact('category', 'htmlOption'));
     }
+    public function update($id, Request $request)
+    {
+        $this->category->find($id)->update([
+            'name' => $request->name,
+            'parent_id' => $request->parent_id
+        ]);
+        return redirect()->route('categories.index');
+    }
     public function delete($id)
     {
-        
+        $this->category->find($id)->delete();
+        return redirect()->route('categories.index');
     }
 }
