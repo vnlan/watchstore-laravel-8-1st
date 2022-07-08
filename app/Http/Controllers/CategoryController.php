@@ -10,7 +10,7 @@ class CategoryController extends Controller
   
     public function __construct()
     {
-        $this->category = new Category;
+        $this->category = new Category; 
     }
     
     public function getCategory($parent_id)
@@ -19,6 +19,7 @@ class CategoryController extends Controller
         $recursive = new Recursive($data);
         $htmlOption = $recursive->categoryRecursive($parent_id);
         return $htmlOption;
+        
     }
 
     //
