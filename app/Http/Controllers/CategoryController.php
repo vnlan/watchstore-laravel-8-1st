@@ -8,11 +8,11 @@ use App\Components\Recursive;
 class CategoryController extends Controller
 {
   
-    public function __construct(Category $category)
+    public function __construct()
     {
-     $this->category = $category;
-
+        $this->category = new Category;
     }
+    
     public function getCategory($parent_id)
     {
         $data = $this->category->all();

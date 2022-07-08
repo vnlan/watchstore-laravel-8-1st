@@ -20,6 +20,12 @@ Route::get('/admin', function () {
     return view('admin/home');
 });
 
+
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' ], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
+
+
 Route::prefix('admin')->group(function () {
     //Category
     Route::prefix('categories')->group(function () {
