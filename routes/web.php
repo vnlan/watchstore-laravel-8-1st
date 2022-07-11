@@ -48,7 +48,7 @@ Route::prefix('admin')->group(function () {
             'as' => 'categories.update',
             'uses' => 'App\Http\Controllers\CategoryController@update']);
     });
-    //Product
+    //Products
     Route::prefix('products')->group(function () {
         Route::get('/',[
             'as' => 'products.index',

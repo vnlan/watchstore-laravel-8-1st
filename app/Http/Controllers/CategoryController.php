@@ -17,16 +17,15 @@ class CategoryController extends Controller
     {
         $data = $this->category->all();
         $recursive = new Recursive($data);
-        $htmlOption = $recursive->categoryRecursive($parent_id);
-        return $htmlOption;
-        
+        $categoryOptions = $recursive->categoryRecursive($parent_id);
+        return $categoryOptions;
     }
 
     //
     public function create(){
   
-        $htmlOption = $this->getCategory($parent_id = '');
-        return view('admin.manage.categories.add',compact('htmlOption'));
+        $categoryOptions = $this->getCategory($parent_id = '');
+        return view('admin.manage.categories.add',compact('categoryOptions'));
     }
     public function index(){
         $categories = $this->category->latest()->paginate(5);
@@ -43,9 +42,9 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = $this->category->find($id);
-        $htmlOption = $this->getCategory($category->parent_id);
+        $categoryOptions = $this->getCategory($category->parent_id);
      
-        return view('admin.manage.categories.edit', compact('category', 'htmlOption'));
+        return view('admin.manage.categories.edit', compact('category', 'categoryOptions'));
     }
     public function update($id, Request $request)
     {

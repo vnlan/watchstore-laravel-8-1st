@@ -30,7 +30,7 @@
                             <label>Chọn danh mục cha</label>
                             <select class="form-control" name="parent_id">
                                 <option value="0">----Chọn danh mục cha----</option>
-                                {!! $htmlOption !!}
+                                {!! $categoryOptions !!}
                             </select>                  
                             
                         </div>

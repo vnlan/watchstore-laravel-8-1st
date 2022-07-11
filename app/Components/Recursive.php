@@ -2,6 +2,8 @@
 namespace App\Components;
 use App\Models\Category;
 class Recursive{
+
+    
     private $data;
     private $htmlOption = '';
 
