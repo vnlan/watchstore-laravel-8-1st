@@ -15,6 +15,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="{{asset('adminlte/plugins/fontawesome-free/css/all.min.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('adminlte/dist/css/adminlte.min.css')}}">
+    @yield('css')
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -28,13 +29,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 @yield('content')
     <!-- Control Sidebar -->
-{{--    <aside class="control-sidebar control-sidebar-dark">--}}
-{{--        <!-- Control sidebar content goes here -->--}}
-{{--        <div class="p-3">--}}
-{{--            <h5>Title</h5>--}}
-{{--            <p>Sidebar content</p>--}}
-{{--        </div>--}}
-{{--    </aside>--}}
+ <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+        <div class="p-3">
+            <h5>Title</h5>
+           <p>Sidebar content</p>
+        </div>
+  </aside>
 <!-- /.control-sidebar -->
 
     <!-- Main Footer -->
@@ -53,5 +54,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+@yield('js')
 </body>
 </html>
