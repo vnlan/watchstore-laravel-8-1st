@@ -48,7 +48,7 @@
                             <div class="form-group col-md-6">
                                 <label for="inputAddress2">Danh mục sản phẩm</label>
                                 <select name="category_id"  class="form-control">
-                                    <option value="0" selected>----Chọn danh mục sản phẩm----</option>
+                                    <option value="0" >----Chọn danh mục sản phẩm----</option>
                                     {!! $categoryOptions !!}
                                 </select>
                             </div>

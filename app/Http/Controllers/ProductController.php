@@ -6,6 +6,7 @@ use App\Components\Recursive;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\ProductCompany;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -18,12 +19,15 @@ class ProductController extends Controller
     private $category;
     private $product;
     private $productImage;
+    private $productCompany;
     //
     public function __construct()
     {
         $this->product = new Product;
         $this->category = new Category; 
         $this->productImage = new ProductImage;
+        $this->productCompany = new ProductCompany;
+
     }
 
     public function index()
@@ -42,8 +46,9 @@ class ProductController extends Controller
 
     public function create()
     {
+        $productCompanies = $this->productCompany->all();
         $categoryOptions = $this->getCategory($parent_id = '');
-        return view('admin.manage.products.add',compact('categoryOptions'));
+        return view('admin.manage.products.add',compact('categoryOptions','productCompanies'));
     }
 
 
@@ -79,7 +84,7 @@ class ProductController extends Controller
                 }
             }
             DB::commit();
-            return redirect()->route('admin.manage.products.index');
+            return redirect()->route('products.index');
         }catch(Exception $exception){
             DB::rollBack();
             Log::error('Message: '. $exception->getMessage() . 'Line: ' .$exception->getLine());
@@ -91,7 +96,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = $this->product->find($id); 
-        $categoryOptions = $this->getCategory($parent_id = '');
+        $categoryOptions = $this->getCategory($product->category_id);
         return view('admin.manage.products.edit', compact('categoryOptions', 'product'));
     }
     

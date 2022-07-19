@@ -75,9 +75,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('product-company.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Quản lý thương hiệu</p>
+                                <p>Quản lý hãng sản xuất</p>
                             </a>
                         </li>
                         <li class="nav-item">

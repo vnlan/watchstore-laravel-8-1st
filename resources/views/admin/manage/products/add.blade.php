@@ -42,15 +42,17 @@
                             <div class="form-group col-md-6">
                                 <label for="inputAddress2">Danh mục sản phẩm</label>
                                 <select name="category_id"  class="form-control">
-                                    <option value="0" selected>----Chọn danh mục sản phẩm----</option>
+                                    <!-- <option value="0" selected>----Chọn danh mục sản phẩm----</option> -->
                                     {!! $categoryOptions !!}
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputAddress2">Hãng sản xuất</label>
                                 <select name="product_company_id" class="form-control">
-                                    <option value="1" selected>----Chọn hãng sản xuất----</option>
-                                    <option>...</option>
+                                    
+                                    @foreach($productCompanies as $productCompany)
+                                        <option value="{{ $productCompany->id }}"> {{ $productCompany->company_name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 

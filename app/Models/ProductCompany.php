@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class ProductCompany extends Model
 {
     protected $table = 'product_company';
-    protected $fillable= ['company_name', 'logo', 'address'];
+    protected $fillable= ['company_name','company_short_name', 'logo_image_path', 'logo_image_name','address'];
 
 }

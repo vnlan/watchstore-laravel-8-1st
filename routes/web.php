@@ -69,4 +69,25 @@ Route::prefix('admin')->group(function () {
             'as' => 'products.update',
             'uses' => 'App\Http\Controllers\ProductController@update']);
     });
+    //Products Company
+    Route::prefix('product-company')->group(function () {
+        Route::get('/',[
+            'as' => 'product-company.index',
+            'uses' => 'App\Http\Controllers\ProductCompanyController@index']);
+        Route::get('/create',[
+            'as' => 'product-company.create',
+            'uses' => 'App\Http\Controllers\ProductCompanyController@create']);
+        Route::post('/store',[
+            'as' => 'product-company.store',
+            'uses' => 'App\Http\Controllers\ProductCompanyController@store']);
+        Route::get('/edit/{id}',[
+            'as' => 'product-company.edit',
+            'uses' => 'App\Http\Controllers\ProductCompanyController@edit']);
+        Route::get('/delete/{id}',[
+            'as' => 'product-company.delete',
+            'uses' => 'App\Http\Controllers\ProductCompanyController@delete']);
+        Route::post('/update/{id}',[
+            'as' => 'product-company.update',
+            'uses' => 'App\Http\Controllers\ProductCompanyController@update']);
+    });
 });
