@@ -31,7 +31,7 @@
                 <div class="row">
                     <div class="col-9">
 
-                    <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('products.update', ['id' => $product->id ]) }}" method="post" enctype="multipart/form-data">
                     @csrf
                         <div class="form-row">
                             <div class="form-group col-md-4">

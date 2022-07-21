@@ -99,5 +99,50 @@ class ProductController extends Controller
         $categoryOptions = $this->getCategory($product->category_id);
         return view('admin.manage.products.edit', compact('categoryOptions', 'product'));
     }
+
+    public function update(Request $request, $id)
+    {
+        try{
+            DB::beginTransaction();
+            $productMapping = [
+                'sku' => $request->sku,
+                'name' => $request->name,
+                'price' => $request->price,
+                'stock' => $request->stock,
+                'product_company_id' => $request->product_company_id,
+                'short_description' => $request->short_description,
+                'long_description'=> $request->long_description,
+                'category_id' => $request->category_id,
+            ];
+            $featureImageUploaded = $this->storageFileUpload($request, 'feature_image_path', 'photos/products/'. $request->sku . '/feature');
+            if(!empty($featureImageUploaded)){
+                $productMapping['feature_image_path'] = $featureImageUploaded['file_path'];
+                $productMapping['feature_image_name'] = $featureImageUploaded['file_name'];
+            }
+            $this->product->find($id)->update($productMapping);
+            $productUpdated = $this->product->find($id);
+            //Add detail images for product
+            if($request->hasFile('image_path')){
+                $this->productImage->where('product_id', $id)->delete();
+                foreach ($request->image_path as $fileItems ) {
+                    $productDetailImage = $this->storageMultipleFileUpload($fileItems, 'photos/products/'. $request->sku . '/detail');
+                    $productUpdated->images()->create([
+                        'image_path' => $productDetailImage['file_path'],
+                        'image_name' => $productDetailImage['file_name'],
+                    ]);
+                }
+            }
+            DB::commit();
+            return redirect()->route('products.index');
+        }catch(Exception $exception){
+            DB::rollBack();
+            Log::error('Message: '. $exception->getMessage() . 'Line: ' .$exception->getLine());
+        }
+
+    }
+    public function delete($id)
+    {
+        dd($id);
+    }
     
 }
