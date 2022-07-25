@@ -1,4 +1,4 @@
-@extends('shop.layouts.shop-layout')
+@extends('watch-shop.layouts.shop-layout')
 @section('shop-content')
     <!-- Content -->
 
