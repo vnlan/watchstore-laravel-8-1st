@@ -34,6 +34,7 @@ Route::prefix('/')->group(function () {
 
 
 
+
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' ], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
