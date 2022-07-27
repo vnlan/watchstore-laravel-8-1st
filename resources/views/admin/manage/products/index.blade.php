@@ -10,6 +10,16 @@
  <link rel="stylesheet" href="{{ asset('css/admin-page/product/index/product-index.css') }}">
 @endsection
 
+@section('js')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript" src="{{ asset('js/reuseable/sweetalert2.js') }}"></script>
+        
+
+
+@endsection
+
+
+
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -58,7 +68,7 @@
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
                                 <!-- Button trigger modal -->
-                                <button  class="btn btn-danger" id="btnPopupDelete" href="#" data-toggle="modal" data-target="#exampleModal" >
+                                <button  class="btn btn-danger action-delete" id="btnPopupDelete" href="#" data-toggle="modal" data-target="" >
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
                               
@@ -81,25 +91,5 @@
         <!-- /.content -->
     </div>
 
-    <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Xác nhận xóa danh mục</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                       Bạn có chắc muốn xóa danh mục có id <span id="categoryId"> </span>?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                        <a id="btnDeleteCategory" type="button" href="" class="btn btn-danger">Xóa</a>
-                    </div>
-                    </div>
-                </div>
-            </div>
     <!-- /.content-wrapper -->
 @endsection

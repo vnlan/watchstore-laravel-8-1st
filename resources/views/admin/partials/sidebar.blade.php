@@ -1,17 +1,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-<script>
-//     $(document).ready(function () {
-//     $('.nav li a').click(function(e) {
 
-//         $('.nav li a').removeClass('active');
-
-//         var $parent = $(this).parent();
-//         $parent.addClass('active');
-//         e.preventDefault();
-//     });
-// });
-</script>
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 
