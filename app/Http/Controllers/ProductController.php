@@ -11,7 +11,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Traits\StorageFileTrait;
-use DB;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use PHPUnit\Exception;
+
 
 class ProductController extends Controller
 {

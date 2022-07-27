@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ShopProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +15,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('watch-shop/home');
 });
 Route::get('/admin', function () {
     return view('admin/home');
 });
+
+Route::prefix('/')->group(function () {
+    //Category
+    Route::prefix('products')->group(function () {
+        Route::get('/',[
+            'as' => 'shop.products.all',
+            'uses' => 'App\Http\Controllers\ShopProductController@index']);
+    });
+});
+
 
 
 
@@ -91,4 +102,11 @@ Route::prefix('admin')->group(function () {
             'as' => 'product-company.update',
             'uses' => 'App\Http\Controllers\ProductCompanyController@update']);
     });
+
+    
+    
 });
+
+
+
+
