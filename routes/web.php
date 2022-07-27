@@ -18,9 +18,11 @@ Route::get('/', function () {
     return view('watch-shop/home');
 });
 Route::get('/admin', function () {
-    return view('admin/home');
+    return view('admin/home'); 
 });
 
+
+//Route for shop font
 Route::prefix('/')->group(function () {
     //Category
     Route::prefix('products')->group(function () {
