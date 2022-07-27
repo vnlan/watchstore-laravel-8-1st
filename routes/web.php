@@ -23,6 +23,7 @@ Route::get('/admin', function () {
 
 
 //Route for shop font
+//Test 2
 Route::prefix('/')->group(function () {
     //Category
     Route::prefix('products')->group(function () {
