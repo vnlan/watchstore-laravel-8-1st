@@ -25,11 +25,21 @@ Route::get('/admin', function () {
 //Route for shop font
 //Test 2
 Route::prefix('/')->group(function () {
-    //Category
+    //Shop
     Route::prefix('products')->group(function () {
         Route::get('/',[
             'as' => 'shop.products.all',
             'uses' => 'App\Http\Controllers\ShopProductController@index']);
+    });
+    //Shopping cart
+    Route::prefix('shopping-cart')->group(function () {
+        Route::get('/',[
+            'as' => 'shopping-cart',
+            'uses' => 'App\Http\Controllers\ShoppingCartController@index']);
+        Route::get('/checkout', [
+            'as' => 'checkout',
+            'uses' => 'App\Http\Controllers\ShoppingCartController@checkout'
+        ]);
     });
 });
 
