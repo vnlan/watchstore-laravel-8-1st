@@ -55,8 +55,10 @@
                             <div class="form-group col-md-6">
                                 <label for="inputAddress2">Hãng sản xuất</label>
                                 <select name="product_company_id" class="form-control">
-                                    <option value="1" selected>----Chọn hãng sản xuất----</option>
-                                    <option>...</option>
+                                    @foreach ($productCompanies as $productCompany)
+                                        <option value="{{ $productCompany->id }}"  {{( $productCompany->id == $product->product_company_id) ? 'selected' : '' }}>{{$productCompany->company_name}}</option>
+                                    @endforeach
+
                                 </select>
                             </div>
 

@@ -53,6 +53,7 @@
                                     @foreach($productCompanies as $productCompany)
                                         <option value="{{ $productCompany->id }}"> {{ $productCompany->company_name }}</option>
                                     @endforeach
+                                    
                                 </select>
                             </div>
 

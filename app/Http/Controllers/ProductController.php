@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Traits\StorageFileTrait;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use PHPUnit\Exception;
 
@@ -100,7 +101,8 @@ class ProductController extends Controller
     {
         $product = $this->product->find($id); 
         $categoryOptions = $this->getCategory($product->category_id);
-        return view('admin.manage.products.edit', compact('categoryOptions', 'product'));
+        $productCompanies = $this->productCompany->all();
+        return view('admin.manage.products.edit', compact('categoryOptions', 'product','productCompanies'));
     }
 
     public function update(Request $request, $id)
@@ -145,7 +147,28 @@ class ProductController extends Controller
     }
     public function delete($id)
     {
-        dd($id);
-    }
+        try {
+            $productOnDelete = $this->product->find($id);
+            $productImagesDirectory = 'storage/photos/products/' . $productOnDelete->sku; 
+           
+            if(File::exists($productImagesDirectory)){
+                File::deleteDirectory(public_path($productImagesDirectory));
+            }
+            $productOnDelete->images()->delete();
+            $productOnDelete->delete();
+            
+            return response()->json([
+                'code' => 200,
+                'message' => 'success',
     
+            ],200);
+            
+        } catch (Exception $exception) {
+            return response()->json([
+                'code' => 500,
+                'message' => 'fail',
+    
+            ],500);
+        }
+    }  
 }

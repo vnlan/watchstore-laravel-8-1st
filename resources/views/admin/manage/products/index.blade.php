@@ -12,7 +12,7 @@
 
 @section('js')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="text/javascript" src="{{ asset('js/reuseable/sweetalert2.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/reuseable/sweetalert.js') }}"></script>
         
 
 
@@ -68,9 +68,9 @@
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
                                 <!-- Button trigger modal -->
-                                <button  class="btn btn-danger action-delete" id="btnPopupDelete" href="#" data-toggle="modal" data-target="" >
+                                <a  class="btn btn-danger action-delete"  data-url="{{route('products.delete', ['id' => $product->id])}}" >
                                     <i class="fa-solid fa-trash"></i>
-                                </button>
+                                </a>
                               
                             </td>
                         </tr>
