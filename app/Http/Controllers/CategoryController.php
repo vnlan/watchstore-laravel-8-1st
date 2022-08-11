@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Components\Recursive;
 class CategoryController extends Controller
 {
+    private $category;
   
     public function __construct()
     {

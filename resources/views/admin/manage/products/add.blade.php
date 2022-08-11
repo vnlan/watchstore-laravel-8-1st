@@ -1,32 +1,31 @@
-
 @extends('admin.layouts.admin-layout')
 
 @section('title')
-    <title>Thêm sản phẩm</title>
+<title>Thêm sản phẩm</title>
 
 @endsection
 
 @section('content')
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-@include('admin.partials.content-header', ['name' => 'Sản phẩm','key'=> 'Thêm mới'])
-        <!-- /.content-header -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    @include('admin.partials.content-header', ['name' => 'Sản phẩm','key'=> 'Thêm mới'])
+    <!-- /.content-header -->
 
 
-<script src="https://cdn.tiny.cloud/1/pp9wiwakvd50ep1lopz267i1d84gvpyr5hnnhk6vpcwpxd4f/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-<script src="{{ asset('js/admin-page/product/add.js') }}">
+    <script src="https://cdn.tiny.cloud/1/pp9wiwakvd50ep1lopz267i1d84gvpyr5hnnhk6vpcwpxd4f/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="{{ asset('js/admin-page/product/add.js') }}">
 
-  </script>
+    </script>
 
-        <!-- Main content -->
-        <div class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-9">
+    <!-- Main content -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-9">
 
                     <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">
-                    @csrf
+                        @csrf
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="inputEmail4">Mã sản phẩm</label>
@@ -41,7 +40,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputAddress2">Danh mục sản phẩm</label>
-                                <select name="category_id"  class="form-control">
+                                <select name="category_id" class="form-control">
                                     <!-- <option value="0" selected>----Chọn danh mục sản phẩm----</option> -->
                                     {!! $categoryOptions !!}
                                 </select>
@@ -49,11 +48,11 @@
                             <div class="form-group col-md-6">
                                 <label for="inputAddress2">Hãng sản xuất</label>
                                 <select name="product_company_id" class="form-control">
-                                    
+
                                     @foreach($productCompanies as $productCompany)
-                                        <option value="{{ $productCompany->id }}"> {{ $productCompany->company_name }}</option>
+                                    <option value="{{ $productCompany->id }}"> {{ $productCompany->company_name }}</option>
                                     @endforeach
-                                    
+
                                 </select>
                             </div>
 
@@ -71,14 +70,14 @@
                         <div class="form-row ">
                             <div class="form-group col-md-6">
                                 <label for="inputAddress">Ảnh đại diện sản phẩm</label>
-                                <input type="file" name="feature_image_path"  class="form-control-file" id="inputAddress" >
+                                <input type="file" name="feature_image_path" class="form-control-file" id="inputAddress">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputAddress">Các ảnh chi tiết</label>
-                                <input type="file" name="image_path[]" multiple  class="form-control-file" id="inputAddress" placeholder="Nhập số lượng sản phẩm">
+                                <input type="file" name="image_path[]" multiple class="form-control-file" id="inputAddress" placeholder="Nhập số lượng sản phẩm">
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="inputAddress">Mô tả ngắn</label>
                             <textarea class="form-control" name="short_description" placeholder="Nhập mô tả ngắn"></textarea>
@@ -114,18 +113,14 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Thêm mới</button>
                     </form>
-                    </div>
-                    
-                    <!-- /.col-md-6 -->
                 </div>
-                <!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content -->
+
+                <!-- /.col-md-6 -->
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
     </div>
-    <!-- /.content-wrapper -->
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
 @endsection
-
-
-
-

@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ShopProductController;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -105,8 +104,50 @@ Route::prefix('admin')->group(function () {
             'as' => 'product-company.update',
             'uses' => 'App\Http\Controllers\ProductCompanyController@update']);
     });
-
-    
+        //User route
+        Route::prefix('users')->group( function () {
+            Route::get('/',[
+                'as' => 'users.index',
+                'uses' => 'App\Http\Controllers\UserController@index']);
+            Route::get('/create',[
+                'as' => 'users.create',
+                'uses' => 'App\Http\Controllers\UserController@create']);
+            Route::post('/store',[
+                'as' => 'users.store',
+                'uses' => 'App\Http\Controllers\UserController@store']);
+            Route::get('/edit/{id}',[
+                'as' => 'users.edit',
+                'uses' => 'App\Http\Controllers\UserController@edit']);
+            Route::get('/delete/{id}',[
+                'as' => 'users.delete',
+                'uses' => 'App\Http\Controllers\UserController@delete']);
+            Route::post('/update/{id}',[
+                'as' => 'users.update',
+                'uses' => 'App\Http\Controllers\UserController@update']);
+        });
+        Route::prefix('roles')->group( function () {
+            Route::get('/',[
+                'as' => 'roles.index',
+                'uses' => 'App\Http\Controllers\RoleController@index']);
+            Route::get('/create',[
+                'as' => 'roles.create',
+                'uses' => 'App\Http\Controllers\RoleController@create']);
+            Route::post('/store',[
+                'as' => 'roles.store',
+                'uses' => 'App\Http\Controllers\RoleController@store']);
+            Route::get('/edit/{id}',[
+                'as' => 'roles.edit',
+                'uses' => 'App\Http\Controllers\RoleController@edit']);
+            Route::get('/delete/{id}',[
+                'as' => 'roles.delete',
+                'uses' => 'App\Http\Controllers\RoleController@delete']);
+            Route::post('/update/{id}',[
+                'as' => 'roles.update',
+                'uses' => 'App\Http\Controllers\RoleController@update']);
+                Route::get('/test',[
+                    'as' => 'roles.test',
+                    'uses' => 'App\Http\Controllers\RoleController@test']);
+        });
     
 });
 
