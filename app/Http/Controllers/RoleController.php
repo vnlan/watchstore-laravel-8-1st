@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Http\Request;
 
@@ -13,10 +14,10 @@ class RoleController extends Controller
      * @return \Illuminate\Http\Response
      */
     private $role;
-
+    private $permission;
     public function __construct()
     {
-
+        $this->permission = new Permission;
         $this->role = new Role; 
     }
     public function index()
@@ -34,8 +35,9 @@ class RoleController extends Controller
      */
     public function create()
     {
+        $permissionParents = $this->permission->where('parent_id',0)->get();
         //
-        return view('admin.manage.roles.add');
+        return view('admin.manage.roles.add', compact('permissionParents'));
     }
 
     /**
@@ -46,7 +48,10 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->role->create([
+            'name' => $request->name,
+            ''
+        ]);
     }
 
     /**

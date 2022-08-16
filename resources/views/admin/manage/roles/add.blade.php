@@ -12,8 +12,12 @@
     @include('admin.partials.content-header', ['name' => 'Vai trò','key'=> 'Thêm mới'])
     <!-- /.content-header -->
     @section('js')
-    <script type="text/javascript" src="{{ asset('js/reuseable/select2.js') }}"></script>
+   
+    <script type="text/javascript" src="{{ asset('js/admin-page/role/add.js') }}"></script>
+
     @endsection
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- Main content -->
     <div class="content">
@@ -23,6 +27,7 @@
                     <form action="{{ route('roles.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
+
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Tên vai trò</label>
@@ -31,7 +36,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Tên chi tiết vai trò</label>
-                                    <input type="text" class="form-control" name="name" placeholder="Nhập tên danh mục">
+                                    <input type="text" class="form-control" name="display_name" placeholder="Nhập tên danh mục">
 
                                 </div>
                                 <div class="form-group">
@@ -40,32 +45,34 @@
                                 </div>
                             </div>
                         </div>
+                        @foreach ( $permissionParents as $permissionParent)
                         <div class="row">
-
+        
                             <div class="col-md-12">
                                 <div class="card  border-primary mb-3 col-md-12">
                                     <div class="bg-green card-header">
                                         <label>
-                                            <input type="checkbox" value="" />
-                                            Module sản phẩm
+                                            <input type="checkbox" value="" class="checkbox_wrapper" />
+                                          Module {{ $permissionParent->name}}
                                         </label>
                                     </div>
                                     <div class="row">
-                                    @for ($i=1; $i<=4; $i++)
-                                        
-                                  
+                                    @foreach ($permissionParent->permissionChildren as $permissionChildren)
+                             
                                     <div class="card-body text-primary col-md-3">
                                         <h5 class="card-title">
                                             <label>
-                                                <input type="checkbox" value="" />
+                                                <input type="checkbox" name="permission_id[]" class="checkbox_children" value="{{ $permissionChildren->id }}" />
                                             </label>
-                                            Thêm sản phẩm
+                                            {{ $permissionChildren->display_name}}
                                         </h5>
                                     </div>
-                                    @endfor
+                                    @endforeach
                                     </div>
 
                                 </div>
+                            @endforeach
+
 
                             </div>
 
