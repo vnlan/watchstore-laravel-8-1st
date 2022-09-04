@@ -45,9 +45,7 @@
                                 <img src="{{ $productCompany->logo_image_path }}" width="150" height="100" class="img-custom">
                             </td>
                             <td>
-                                <button  class="btn btn-success" id="" href="#" data-toggle="modal" data-target="">
-                                    <i class="fa-solid fa-eye"></i>
-                                </button>
+                               
                                 <a type="button" href="{{ route('product-company.edit', ['id' => $productCompany->id]) }}" class="btn btn-primary">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>

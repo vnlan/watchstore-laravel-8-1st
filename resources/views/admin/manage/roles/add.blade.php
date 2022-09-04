@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Mô tả vai trò</label>
-                                    <textarea class="form-control" rows="4" placeholder="Nhập mô tả vai trò"></textarea>
+                                    <textarea class="form-control" name="description" rows="4" placeholder="Nhập mô tả vai trò"></textarea>
                                 </div>
                             </div>
                         </div>

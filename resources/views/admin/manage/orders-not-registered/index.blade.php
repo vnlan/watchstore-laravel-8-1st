@@ -1,4 +1,3 @@
-
 @extends('admin.layouts.admin-layout')
 
 @section('title')
@@ -22,7 +21,7 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        @include('admin.partials.content-header', ['name' => 'Người dùng','key'=> 'Tất cả'])
+        @include('admin.partials.content-header', ['name' => 'Đơn hàng','key'=> 'Tất cả'])
         <!-- /.content-header -->
        
 
@@ -30,51 +29,51 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-12">
-                        <a href="{{ route('users.create') }}" class="btn btn-success float-right m-2">Thêm người dùng</a>
-                    </div>
+                    <!-- <div class="col-md-12">
+                        <a href="" class="btn btn-success float-right m-2">Thêm người dùng</a>
+                    </div> -->
                     <div class="col-md-12">
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th>Số CMT</th>
-                            <th>Họ và tên</th>
-                            <th>Ảnh đại diện</th>
-                            <th>Giới tính</th>
-                            <th>Vai trò</th>
-                            <th>Mức lương</th>
+                            <th>ID</th>
+                            <th>Tên người đặt</th>
+                            <th>Tổng cộng</th>
+                            <th>Trạng thái</th>
                             <th>Hành động</th>
                         </tr>   
                         </thead>
                         <tbody>
-                        @foreach($users as $user)
+                        @foreach($orders as $order)
                         <tr>
-                            <td>{{ $user->id_card_number }}</td>
-                            <td>{{ $user->display_name }}</td>
-                            <td><img src="{{ $user->avatar_path }}" alt="Empty!" width="150" height="100" class="img-custom"></td>
-                            @if ($user->gender == 0)
-                                <td>Nam</td>
+                            <td>{{ $order->id}}</td>
+                            <td>{{ $order->first_name }}</td>
+                            <td>{{ $order->total}} đ</td>
+                            @if($order->status  == 1)
+                            <td>Chờ duyệt</td>
+                            @elseif ($order->status  == 2)
+                            <td>Đã duyệt</td>
+                            @elseif ($order->status  == 3)
+                            <td>Đang vận chuyển</td>
+                            @elseif ($order->status  == 4)
+                            <td>Đã hoàn thành</td>
                             @else
-                                <td>Nữ</td>
+                            <td>Đã hủy</td>
                             @endif
                             <td>
-                                @foreach ($user->roles as $role)
-                                    <p>{{$role->name}} </p>
-                                @endforeach
-                            </td>
-                            <td>{{ $user->salary }}</td>
-                            <td>
-                                <button  class="btn btn-success" id="" href="#" >
-                                <i class="fa-solid fa-eye"></i>
-                                </button>
-                              
-                                <a type="button" href="" class="btn btn-primary">
+                            <a type="button" href="{{route('orders-not-registered.check', ['id' => $order->id])}}" class="btn btn-success">
+                                    <i class="fa-solid fa-check"></i>
+                                </a>
+                                <a type="button" href="{{route('orders-not-registered.deny', ['id' => $order->id])}}" class="btn btn-danger">
+                                    <i class="fa-solid fa-ban"></i>
+                                </a>
+                                <a type="button" href="{{route('orders-not-registered.edit', ['id' => $order->id])}}" class="btn btn-primary">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
                                 <!-- Button trigger modal -->
-                                <a  class="btn btn-danger action-delete"  data-url="" >
+                                <!-- <a  class="btn btn-danger action-delete"  data-url="" >
                                     <i class="fa-solid fa-trash"></i>
-                                </a>
+                                </a> -->
                               
                             </td>
                         </tr>
@@ -84,7 +83,7 @@
                     </div>
                     
                     <div class="col-md-12">
-                        {{ $users->links('pagination::bootstrap-4') }}
+                        {{ $orders->links('pagination::bootstrap-4') }}
                     </div>
 
                     <!-- /.col-md-6 -->

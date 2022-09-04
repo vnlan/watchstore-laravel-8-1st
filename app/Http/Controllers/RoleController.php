@@ -17,6 +17,7 @@ class RoleController extends Controller
     private $permission;
     public function __construct()
     {
+        $this->middleware('auth');
         $this->permission = new Permission;
         $this->role = new Role; 
     }
@@ -48,10 +49,13 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $this->role->create([
+       $roleCreated =  $this->role->create([
             'name' => $request->name,
-            ''
+            'display_name' => $request->display_name,
+            'description' => $request->description
         ]);
+        $roleCreated->permissions()->attach($request->permission_id);
+        return redirect()->route('roles.index');
     }
 
     /**
@@ -74,6 +78,10 @@ class RoleController extends Controller
     public function edit($id)
     {
         //
+        $permissionParents = $this->permission->where('parent_id',0)->get();
+        $role = $this->role->find($id);
+        $permissionsChecked = $role->permissions;
+        return view('admin.manage.roles.edit',compact('permissionParents', 'role','permissionsChecked'));
     }
 
     /**
@@ -85,7 +93,14 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $roleRequested = $this->role->find($id);
+        $roleRequested->update([
+            'name' => $request->name,
+            'display_name' => $request->display_name,
+            'description' => $request->description
+        ]);
+        $roleRequested->permissions()->sync($request->permission_id);
+        return redirect()->route('roles.index');
     }
 
     /**

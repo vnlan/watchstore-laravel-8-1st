@@ -50,7 +50,7 @@
                             <td>{{ $role->name }}</td>
                             <td>{{ $role->display_name }}</td>
                             <td>
-                                <a type="button" href="" class="btn btn-primary">
+                                <a type="button" href="{{route('roles.edit',['id' => $role->id] )}}" class="btn btn-primary">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
                                 <!-- Button trigger modal -->

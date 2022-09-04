@@ -25,13 +25,14 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->user = new User; 
-        $this->role = new Role; 
+        $this->middleware('auth');
+        $this->user = new User;
+        $this->role = new Role;
     }
     public function index()
     {
-        $users = $this->user->paginate(10);
-        return view('admin.manage.users.index',compact('users'));
+        $users = $this->user->paginate(5);
+        return view('admin.manage.users.index', compact('users'));
     }
 
     /**
@@ -67,19 +68,19 @@ class UserController extends Controller
             'education' => $request->education,
             'dob' => $request->dob
         ];
-        $avatarImageUploaded = $this->storageFileUpload($request, 'avatar_path', 'photos/users/'. $request->username . '/avatar');
-        if(!empty($avatarImageUploaded)){
+        $avatarImageUploaded = $this->storageFileUpload($request, 'avatar_path', 'photos/users/' . $request->username . '/avatar');
+        if (!empty($avatarImageUploaded)) {
             $userMapping['avatar_path'] = $avatarImageUploaded['file_path'];
             $userMapping['avatar_name'] = $avatarImageUploaded['file_name'];
         }
-        $contractImageUploaded = $this->storageFileUpload($request, 'contract_image_path', 'photos/users/'. $request->username . '/contract');
-        if(!empty($contractImageUploaded)){
+        $contractImageUploaded = $this->storageFileUpload($request, 'contract_image_path', 'photos/users/' . $request->username . '/contract');
+        if (!empty($contractImageUploaded)) {
             $userMapping['contract_image_path'] = $contractImageUploaded['file_path'];
             $userMapping['contract_image_name'] = $contractImageUploaded['file_name'];
         }
         $userCreated = $this->user->create($userMapping);
         $userCreated->roles()->attach($request->role_id);
-        return redirect()->route('users.index'); 
+        return redirect()->route('users.index');
     }
 
     /**
@@ -126,4 +127,30 @@ class UserController extends Controller
     // {
     //     //
     // }
+
+    public function authorizeRoles($roles)
+    {
+        if (is_array($roles)) {
+            return $this->hasAnyRole($roles) ||
+                abort(401, 'This action is unauthorized.');
+        }
+        return $this->hasRole($roles) ||
+            abort(401, 'This action is unauthorized.');
+    }
+    /**
+     * Check multiple roles
+     * @param array $roles
+     */
+    public function hasAnyRole($roles)
+    {
+        return null !== $this->roles()->whereIn('name', $roles)->first();
+    }
+    /**
+     * Check one role
+     * @param string $role
+     */
+    public function hasRole($role)
+    {
+        return null !== $this->roles()->where('name', $role)->first();
+    }
 }

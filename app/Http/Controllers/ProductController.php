@@ -27,6 +27,7 @@ class ProductController extends Controller
     //
     public function __construct()
     {
+        $this->middleware('auth');
         $this->product = new Product;
         $this->category = new Category; 
         $this->productImage = new ProductImage;

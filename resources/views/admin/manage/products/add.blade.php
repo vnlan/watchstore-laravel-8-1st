@@ -84,7 +84,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputAddress">Mô tả chi tiết</label>
-                            <textarea class="form-control tinymce-editor" name="long_description" rows="6"></textarea>
+                            <textarea class="form-control tinymce-editor" name="long_description" rows="15"></textarea>
                         </div>
                         <!-- <div class="form-row">
                             <div class="form-group col-md-6">

@@ -5,13 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Components\Recursive;
+use Illuminate\Support\Facades\Auth;
+
 class CategoryController extends Controller
 {
     private $category;
   
     public function __construct()
     {
+        $this->middleware('auth');
         $this->category = new Category; 
+       
+        
     }
     
     public function getCategory($parent_id)

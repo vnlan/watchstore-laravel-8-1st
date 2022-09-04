@@ -59,10 +59,7 @@
                                 <td>{{ number_format($product->price) }} đ</td>
                                 <td>{{ $product->stock }}</td>
                                 <td>
-                                    <button class="btn btn-success" id="" href="#">
-                                        <i class="fa-solid fa-eye"></i>
-                                    </button>
-
+                                    
                                     <a type="button" href="{{ route('products.edit', ['id' => $product->id]) }}" class="btn btn-primary">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
