@@ -43,3 +43,9 @@ function actionDelete(event){
    $(function (){
        $(document).on('click', '.action-delete', actionDelete)
    });
+
+   /*
+     src="$v->img"
+     
+   
+   */

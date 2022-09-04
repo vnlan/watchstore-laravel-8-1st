@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ShopProductController;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,24 +22,37 @@ Route::get('/admin', function () {
 
 
 //Route for shop font
-//Test 2
+
 Route::prefix('/')->group(function () {
-    //Shop
+    //Category
     Route::prefix('products')->group(function () {
         Route::get('/',[
             'as' => 'shop.products.all',
             'uses' => 'App\Http\Controllers\ShopProductController@index']);
+        Route::get('/detail/{id}',[
+            'as' => 'shop.products.detail',
+            'uses' => 'App\Http\Controllers\ShopProductController@detail']);
     });
-    //Shopping cart
-    Route::prefix('shopping-cart')->group(function () {
+    Route::prefix('cart')->group(function () {
         Route::get('/',[
-            'as' => 'shopping-cart',
-            'uses' => 'App\Http\Controllers\ShoppingCartController@index']);
-        Route::get('/checkout', [
-            'as' => 'checkout',
-            'uses' => 'App\Http\Controllers\ShoppingCartController@checkout'
-        ]);
+            'as' => 'shop.cart.index',
+            'uses' => 'App\Http\Controllers\CartController@index']);
+        Route::get('/add/{id}',[
+            'as' => 'shop.cart.add',
+            'uses' => 'App\Http\Controllers\CartController@add']);
+        Route::get('/delete/{rowId}',[
+            'as' => 'shop.cart.delete',
+            'uses' => 'App\Http\Controllers\CartController@delete']);
     });
+    Route::prefix('checkout')->group(function () {
+        Route::get('/',[
+            'as' => 'shop.checkout.index',
+            'uses' => 'App\Http\Controllers\CheckoutController@index']);
+        Route::post('/add-not-registered-order',[
+            'as' => 'shop.checkout.add-nr-order',
+            'uses' => 'App\Http\Controllers\CheckoutController@addNotRegisteredOrder']);
+    });
+       
 });
 
 
@@ -52,6 +64,12 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' ], function () {
 
 
 Route::prefix('admin')->group(function () {
+    // Đăng nhập và xử lý đăng nhập
+    Route::get('login', [ 'as' => 'admin.auth.login', 'uses' => 'App\Http\Controllers\Auth\LoginController@getLogin']);
+    Route::post('login', [ 'as' => 'admin.auth.login', 'uses' => 'App\Http\Controllers\Auth\LoginController@postLogin']);
+    
+    // Đăng xuất
+    Route::get('logout', [ 'as' => 'admin.auth.logout', 'uses' => 'App\Http\Controllers\Auth\LogoutController@getLogout']);
     //Category
     Route::prefix('categories')->group(function () {
         Route::get('/',[
@@ -116,7 +134,76 @@ Route::prefix('admin')->group(function () {
             'uses' => 'App\Http\Controllers\ProductCompanyController@update']);
     });
 
-    
+        //User route
+        Route::prefix('users')->group( function () {
+            Route::get('/',[
+                'as' => 'users.index',
+                'uses' => 'App\Http\Controllers\UserController@index']);
+            Route::get('/create',[
+                'as' => 'users.create',
+                'uses' => 'App\Http\Controllers\UserController@create']);
+            Route::post('/store',[
+                'as' => 'users.store',
+                'uses' => 'App\Http\Controllers\UserController@store']);
+            Route::get('/edit/{id}',[
+                'as' => 'users.edit',
+                'uses' => 'App\Http\Controllers\UserController@edit']);
+            Route::get('/delete/{id}',[
+                'as' => 'users.delete',
+                'uses' => 'App\Http\Controllers\UserController@delete']);
+            Route::post('/update/{id}',[
+                'as' => 'users.update',
+                'uses' => 'App\Http\Controllers\UserController@update']);
+        });
+        Route::prefix('roles')->group( function () {
+            Route::get('/',[
+                'as' => 'roles.index',
+                'uses' => 'App\Http\Controllers\RoleController@index']);
+            Route::get('/create',[
+                'as' => 'roles.create',
+                'uses' => 'App\Http\Controllers\RoleController@create']);
+            Route::post('/store',[
+                'as' => 'roles.store',
+                'uses' => 'App\Http\Controllers\RoleController@store']);
+            Route::get('/edit/{id}',[
+                'as' => 'roles.edit',
+                'uses' => 'App\Http\Controllers\RoleController@edit']);
+            Route::get('/delete/{id}',[
+                'as' => 'roles.delete',
+                'uses' => 'App\Http\Controllers\RoleController@delete']);
+            Route::post('/update/{id}',[
+                'as' => 'roles.update',
+                'uses' => 'App\Http\Controllers\RoleController@update']);
+                Route::get('/test',[
+                    'as' => 'roles.test',
+                    'uses' => 'App\Http\Controllers\RoleController@test']);
+        });
+        Route::prefix('orders-not-registered')->group(function () {
+            Route::get('/',[
+                'as' => 'orders-not-registered.all',
+                'uses' => 'App\Http\Controllers\OrderController@allNROrders']);
+            // Route::get('/create',[
+            //     'as' => 'orders-not-registered.create',
+            //     'uses' => 'App\Http\Controllers\ProductCompanyController@create']);
+            // Route::post('/store',[
+            //     'as' => 'product-company.store',
+            //     'uses' => 'App\Http\Controllers\ProductCompanyController@store']);
+            Route::get('/edit/{id}',[
+                'as' => 'orders-not-registered.edit',
+                'uses' => 'App\Http\Controllers\OrderController@editNROrder']);
+            Route::get('/delete/{id}',[
+                'as' => 'orders-not-registered.delete',
+                'uses' => 'App\Http\Controllers\OrderController@deleteNROrder']);
+            Route::post('/update/{id}',[
+                'as' => 'orders-not-registered.update',
+                'uses' => 'App\Http\Controllers\OrderController@updateNROrder']);
+            Route::get('/check/{id}',[
+                'as' => 'orders-not-registered.check',
+                'uses' => 'App\Http\Controllers\OrderController@checkNROrder']);
+            Route::get('/deny/{id}',[
+                'as' => 'orders-not-registered.deny',
+                'uses' => 'App\Http\Controllers\OrderController@denyNROrder']);
+        });
     
 });
 

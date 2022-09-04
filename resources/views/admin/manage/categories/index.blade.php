@@ -37,9 +37,7 @@
                             <td>{{$category->id}}</td>
                             <td>{{$category->name}}</td>
                             <td>
-                                <button  class="btn btn-success" id="" href="#" data-toggle="modal" data-target="#deleteModal_{{$category->id}}">
-                                    <i class="fa-solid fa-eye"></i>
-                                </button>
+                                
                                 <a type="button" href="{{ route('categories.edit', ['id' => $category->id]) }}" class="btn btn-primary">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>

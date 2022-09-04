@@ -35,14 +35,14 @@
                         <nav class="main-nav">
                             <ul class="menu sf-arrows">
                                 <li class="megamenu-container active">
-                                    <a href="/" class="sf-with-ul">Home</a>
+                                    <a href="/" class="">Home</a>
 
                                 </li>
-                                <li>
-                                    <a href="{{ route('shop.products.all') }}" class="sf-with-ul">Shop</a>
+                                <li >
+                                    <a href="{{ route('shop.products.all') }}" class="">Shop</a>
                                 </li>
                                 <li>
-                                    <a href="product.html" class="sf-with-ul">Product</a>
+                                    <a href="#" class="sf-with-ul">About us</a>
 
                                     <div class="megamenu megamenu-sm">
                                         <div class="row no-gutters">
@@ -76,32 +76,7 @@
                                         </div><!-- End .row -->
                                     </div><!-- End .megamenu megamenu-sm -->
                                 </li>
-                                <li>
-                                    <a href="#" class="sf-with-ul">Pages</a>
-
-                                    <ul>
-                                        <li>
-                                            <a href="about.html" class="sf-with-ul">About</a>
-
-                                            <ul>
-                                                <li><a href="about.html">About 01</a></li>
-                                                <li><a href="about-2.html">About 02</a></li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="contact.html" class="sf-with-ul">Contact</a>
-
-                                            <ul>
-                                                <li><a href="contact.html">Contact 01</a></li>
-                                                <li><a href="contact-2.html">Contact 02</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="login.html">Login</a></li>
-                                        <li><a href="faq.html">FAQs</a></li>
-                                        <li><a href="404.html">Error 404</a></li>
-                                        <li><a href="coming-soon.html">Coming Soon</a></li>
-                                    </ul>
-                                </li>
+            
                                 <li>
                                     <a href="blog.html" class="sf-with-ul">Blog</a>
 
@@ -144,7 +119,7 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="elements-list.html" class="sf-with-ul">Elements</a>
+                                    <a href="elements-list.html" class="sf-with-ul">Contact us</a>
 
                                     <ul>
                                         <li><a href="elements-products.html">Products</a></li>
@@ -215,63 +190,47 @@
                         <!-- End user -->
 
                         <div class="dropdown cart-dropdown">
-                            <a href="{{ route('shopping-cart') }}" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
                                 <i class="icon-shopping-cart"></i>
-                                <span class="cart-count">2</span>
+                                <span class="cart-count">{{Cart::content()->count()}}</span>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right">
                                 <div class="dropdown-cart-products">
+                                    @foreach (Cart::content() as $cart )
+                                        
+                                    
                                     <div class="product">
                                         <div class="product-cart-details">
                                             <h4 class="product-title">
-                                                <a href="product.html">Beige knitted elastic runner shoes</a>
+                                                <a href="product.html">{{$cart->name}} </a>
                                             </h4>
 
                                             <span class="cart-product-info">
-                                                <span class="cart-product-qty">1</span>
-                                                x $84.00
+                                                <span class="cart-product-qty">{{$cart->qty}}</span>
+                                                x {{number_format($cart->price)}} đ
                                             </span>
                                         </div><!-- End .product-cart-details -->
 
                                         <figure class="product-image-container">
                                             <a href="product.html" class="product-image">
-                                                <img src="assets/images/products/cart/product-1.jpg" alt="product">
+                                                <img src="{{$cart->options->feature_image}}" alt="product">
                                             </a>
                                         </figure>
-                                        <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
+                                        <a href="{{route('shop.cart.delete', ['rowId' => $cart->rowId])}}" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
                                     </div><!-- End .product -->
-
-                                    <div class="product">
-                                        <div class="product-cart-details">
-                                            <h4 class="product-title">
-                                                <a href="product.html">Blue utility pinafore denim dress</a>
-                                            </h4>
-
-                                            <span class="cart-product-info">
-                                                <span class="cart-product-qty">1</span>
-                                                x $76.00
-                                            </span>
-                                        </div><!-- End .product-cart-details -->
-
-                                        <figure class="product-image-container">
-                                            <a href="product.html" class="product-image">
-                                                <img src="assets/images/products/cart/product-2.jpg" alt="product">
-                                            </a>
-                                        </figure>
-                                        <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
-                                    </div><!-- End .product -->
+                                @endforeach
                                 </div><!-- End .cart-product -->
 
                                 <div class="dropdown-cart-total">
                                     <span>Total</span>
 
-                                    <span class="cart-total-price">$160.00</span>
+                                    <span class="cart-total-price">{{number_format((int)Cart::total())}} đ</span>
                                 </div><!-- End .dropdown-cart-total -->
 
                                 <div class="dropdown-cart-action">
-                                    <a href="{{ route('shopping-cart') }}" class="btn btn-primary">View Cart</a>
-                                    <a href="{{ route('checkout') }}" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
+                                    <a href="{{route('shop.cart.index')}}" class="btn btn-primary">View Cart</a>
+                                    <a href="{{route('shop.checkout.index')}}" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
                                 </div><!-- End .dropdown-cart-total -->
                             </div><!-- End .dropdown-menu -->
                         </div><!-- End .cart-dropdown -->
@@ -301,7 +260,7 @@
                             </ul>
                             <div class="tab-content" id="tab-content-5">
                                 <div class="tab-pane fade show active" id="signin" role="tabpanel" aria-labelledby="signin-tab">
-                                    <form action="login">
+                                    <form action="#">
                                         <div class="form-group">
                                             <label for="singin-email">Username or email address *</label>
                                             <input type="text" class="form-control" id="singin-email" name="singin-email" required>
@@ -345,7 +304,7 @@
                                     </div><!-- End .form-choice -->
                                 </div><!-- .End .tab-pane -->
                                 <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
-                                    <form action="register">
+                                    <form action="#">
                                         <div class="form-group">
                                             <label for="register-email">Your email address *</label>
                                             <input type="email" class="form-control" id="register-email" name="register-email" required>

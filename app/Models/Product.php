@@ -22,4 +22,6 @@ class Product extends Model
     {
         return $this->belongsTo(ProductCompany::class, 'product_company_id');
     }
+
+
 }

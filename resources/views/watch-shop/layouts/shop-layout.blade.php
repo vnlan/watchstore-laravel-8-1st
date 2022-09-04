@@ -3,6 +3,7 @@
 
 
 <!-- molla/index-2.html  22 Nov 2019 09:55:32 GMT -->
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,7 +26,7 @@
     <meta name="msapplication-config" content="{{ asset('shop/assets/images/icons/browserconfig.xml') }}">
     <meta name="theme-color" content="#ffffff">
     <!-- Plugins CSS File -->
-    
+
     <link rel="stylesheet" href="{{asset('shop/assets/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('shop/assets/css/plugins/owl-carousel/owl.carousel.css')}}">
     <link rel="stylesheet" href="{{asset('shop/assets/css/plugins/magnific-popup/magnific-popup.css')}}">
@@ -36,7 +37,7 @@
     <link rel="stylesheet" href="{{ asset('shop/assets/css/plugins/nouislider/nouislider.css') }}">
     @yield('shop-css')
 </head>
-    
+
 <body>
     <div class="page-wrapper">
         @include('watch-shop.partials.header')
@@ -48,8 +49,8 @@
         @include('watch-shop.partials.footer')
     </div>
     <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
-<!-- Plugins JS File -->
-<script src="{{asset('shop/assets/js/jquery.min.js')}}"></script>
+    <!-- Plugins JS File -->
+    <script src="{{asset('shop/assets/js/jquery.min.js')}}"></script>
     <script src="{{asset('shop/assets/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('shop/assets/js/jquery.hoverIntent.min.js')}}"></script>
     <script src="{{asset('shop/assets/js/jquery.waypoints.min.js')}}"></script>
@@ -61,9 +62,11 @@
     <script src="{{ asset('shop/assets/js/nouislider.min.js') }}"></script>
     <!-- Main JS File -->
     <script src="{{asset('shop/assets/js/main.js')}}"></script>
+    @yield('shop-js')
 </body>
 
 @include('watch-shop.partials.mobile-menu')
 
 <!-- molla/index-2.html  22 Nov 2019 09:55:42 GMT -->
+
 </html>

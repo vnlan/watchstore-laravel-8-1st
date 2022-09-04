@@ -1,38 +1,37 @@
-
 @extends('admin.layouts.admin-layout')
 
 @section('title')
-    <title>Sửa chi tiết sản phẩm</title>
+<title>Sửa chi tiết sản phẩm</title>
 
 @endsection
 
 @section('css')
- <link rel="stylesheet" href="{{ asset('css/admin-page/product/index/product-index.css') }}">
+<link rel="stylesheet" href="{{ asset('css/admin-page/product/index/product-index.css') }}">
 @endsection
 
 
 @section('content')
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-@include('admin.partials.content-header', ['name' => 'Sản phẩm','key'=> 'Sửa chi tiết'])
-        <!-- /.content-header -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    @include('admin.partials.content-header', ['name' => 'Sản phẩm','key'=> 'Sửa chi tiết'])
+    <!-- /.content-header -->
 
 
-<script src="https://cdn.tiny.cloud/1/pp9wiwakvd50ep1lopz267i1d84gvpyr5hnnhk6vpcwpxd4f/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-<script src="{{ asset('js/admin-page/product/add.js') }}">
+    <script src="https://cdn.tiny.cloud/1/pp9wiwakvd50ep1lopz267i1d84gvpyr5hnnhk6vpcwpxd4f/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="{{ asset('js/admin-page/product/add.js') }}">
 
-  </script>
+    </script>
 
-        <!-- Main content -->
-        <div class="content">
-            <div class="container-fluid">
-                <p></p>
-                <div class="row">
-                    <div class="col-9">
+    <!-- Main content -->
+    <div class="content">
+        <div class="container-fluid">
+            <p></p>
+            <div class="row">
+                <div class="col-9">
 
                     <form action="{{ route('products.update', ['id' => $product->id ]) }}" method="post" enctype="multipart/form-data">
-                    @csrf
+                        @csrf
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="inputEmail4">Mã sản phẩm</label>
@@ -47,8 +46,8 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputAddress2">Danh mục sản phẩm</label>
-                                <select name="category_id"  class="form-control">
-                                    <option value="0" >----Chọn danh mục sản phẩm----</option>
+                                <select name="category_id" class="form-control">
+                                    <option value="0">----Chọn danh mục sản phẩm----</option>
                                     {!! $categoryOptions !!}
                                 </select>
                             </div>
@@ -56,7 +55,7 @@
                                 <label for="inputAddress2">Hãng sản xuất</label>
                                 <select name="product_company_id" class="form-control">
                                     @foreach ($productCompanies as $productCompany)
-                                        <option value="{{ $productCompany->id }}"  {{( $productCompany->id == $product->product_company_id) ? 'selected' : '' }}>{{$productCompany->company_name}}</option>
+                                    <option value="{{ $productCompany->id }}" {{( $productCompany->id == $product->product_company_id) ? 'selected' : '' }}>{{$productCompany->company_name}}</option>
                                     @endforeach
 
                                 </select>
@@ -76,18 +75,18 @@
                         <div class="form-row ">
                             <div class="form-group col-md-6">
                                 <label for="inputAddress">Ảnh đại diện sản phẩm</label>
-                                <input type="file" name="feature_image_path"  class="form-control-file" id="inputAddress" >
+                                <input type="file" name="feature_image_path" class="form-control-file" id="inputAddress">
                                 <div class="col-md-12 mt-3">
                                     <div class="row">
                                         <img src="{{ $product->feature_image_path }}" alt="Empty!" width="100%" height="auto" class="img-custom">
                                     </div>
                                 </div>
-                            
+
                             </div>
-                            
+
                             <div class="form-group col-md-6">
                                 <label for="inputAddress">Các ảnh chi tiết</label>
-                                <input type="file" name="image_path[]" multiple  class="form-control-file" id="inputAddress" placeholder="Nhập số lượng sản phẩm">
+                                <input type="file" name="image_path[]" multiple class="form-control-file" id="inputAddress" placeholder="Nhập số lượng sản phẩm">
 
                                 <div class="col-md-12">
                                     <div class="row">
@@ -100,7 +99,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="inputAddress">Mô tả ngắn</label>
                             <textarea class="form-control" name="short_description" placeholder="Nhập mô tả ngắn">{{ $product->short_description }}</textarea>
@@ -109,25 +108,20 @@
                             <label for="inputAddress">Mô tả chi tiết</label>
                             <textarea class="form-control tinymce-editor" name="long_description" rows="9">{{ $product->long_description }}</textarea>
                         </div>
-                       
+
                         <div class="form-group">
-                         
+
                         </div>
                         <button type="submit" class="btn btn-primary">Thêm mới</button>
                     </form>
-                    </div>
-                    
-                    <!-- /.col-md-6 -->
                 </div>
-                <!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content -->
+
+                <!-- /.col-md-6 -->
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
     </div>
-    <!-- /.content-wrapper -->
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
 @endsection
-
-
-
-
-

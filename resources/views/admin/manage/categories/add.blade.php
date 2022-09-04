@@ -12,7 +12,9 @@
         <!-- Content Header (Page header) -->
 @include('admin.partials.content-header', ['name' => 'danh mục sản phẩm','key'=> 'Thêm mới'])
         <!-- /.content-header -->
-
+@section('js')
+    <script type="text/javascript" src="{{ asset('js/reuseable/select2.js') }}"></script>
+@endsection
         <!-- Main content -->
         <div class="content">
             <div class="container-fluid">
